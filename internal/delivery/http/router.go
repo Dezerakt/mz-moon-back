@@ -12,5 +12,6 @@ func NewRouter(app *fiber.App, cfg *config.Config, container usecase.Dependencie
 	{
 		v1.NewMoodRouter(apiV1Group, container.Mood)
 		v1.NewNoteRouter(apiV1Group, container.Note)
+		v1.NewProgressionRouter(apiV1Group, container.Progression)
 	}
 }

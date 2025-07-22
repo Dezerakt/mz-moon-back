@@ -7,6 +7,7 @@ import (
 	"accord-generator/internal/usecase"
 	"accord-generator/internal/usecase/mood"
 	"accord-generator/internal/usecase/note"
+	"accord-generator/internal/usecase/progression"
 	mongoPkg "accord-generator/pkg/mongo"
 	"fmt"
 	"github.com/gofiber/fiber"
@@ -31,10 +32,12 @@ func main() {
 	// usecases
 	moodUsecase := mood.NewMoodUsecase(mongoRepo.NewMoodRepo(mongoWrap))
 	noteUsecase := note.NewUsecase(mongoRepo.NewNoteRepo(mongoWrap))
+	progressionUsecase := progression.NewUsecase(mongoRepo.NewProgressionRepo(mongoWrap))
 
 	uscContainer := usecase.Dependencies{ // to prevent large amount of pass arguments
-		Mood: moodUsecase,
-		Note: noteUsecase,
+		Mood:        moodUsecase,
+		Note:        noteUsecase,
+		Progression: progressionUsecase,
 	}
 
 	// server
