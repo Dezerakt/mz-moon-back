@@ -13,8 +13,9 @@ func (obj Database) String() string {
 type Collection string
 
 const (
-	Mood Collection = "mood"
-	Note Collection = "note"
+	Mood        Collection = "mood"
+	Note        Collection = "note"
+	Progression Collection = "progression"
 )
 
 func (obj Collection) String() string {

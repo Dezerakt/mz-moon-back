@@ -17,7 +17,7 @@ type progression struct {
 
 func NewProgressionRepo(client *mongoPkg.Wrap) repository.Progression {
 	return &progression{
-		ProgressionCollection: client.AppCollection(vo.Note),
+		ProgressionCollection: client.AppCollection(vo.Progression),
 	}
 }
 
@@ -46,6 +46,17 @@ func (obj *progression) GetByParams(ctx context.Context, params map[string]inter
 	filter := bson.M{}
 
 	for key, value := range params {
+		switch value.(type) {
+		case string:
+			if value.(string) == "" {
+				continue
+			}
+		case int:
+			if value.(int) == 0 {
+				continue
+			}
+		}
+
 		filter[key] = value
 	}
 

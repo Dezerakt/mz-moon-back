@@ -1,6 +1,6 @@
 package progressionDmn
 
 type Request struct {
-	NoteId string `json:"noteId"`
-	MoodId string `json:"moodId"`
+	RootNote string `json:"rootNote"`
+	Mood     string `json:"mood"`
 }

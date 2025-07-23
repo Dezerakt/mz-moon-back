@@ -3,8 +3,9 @@ package v1
 import (
 	progressionDmn "accord-generator/internal/domain/progression"
 	"accord-generator/internal/usecase"
+	"accord-generator/utils"
+	"accord-generator/utils/error"
 	"github.com/gofiber/fiber"
-	"net/http"
 )
 
 type ProgressionRouter struct {
@@ -18,7 +19,7 @@ func NewProgressionRouter(router fiber.Router, progression usecase.Progression) 
 
 	progressionGroup := router.Group("/progression")
 	{
-		progressionGroup.Post("/", r.getProgression)
+		progressionGroup.Get("/", r.getProgression)
 	}
 }
 
@@ -28,16 +29,16 @@ func (obj *ProgressionRouter) getProgression(fiberCtx *fiber.Ctx) {
 		request progressionDmn.Request
 	)
 
-	if err := fiberCtx.BodyParser(&request); err != nil {
-		fiberCtx.Status(http.StatusBadRequest).JSON(err)
+	if err := fiberCtx.QueryParser(&request); err != nil {
+		utils.ReturnError(fiberCtx, errVo.BadRequestError, err)
 		return
 	}
 
-	progression, err := obj.progressionUsecase.GetProgression(ctx, request.NoteId, request.MoodId)
+	progression, err := obj.progressionUsecase.GetProgression(ctx, request.RootNote, request.Mood)
 	if err != nil {
-		fiberCtx.Status(http.StatusBadRequest).JSON(err)
+		utils.ReturnError(fiberCtx, errVo.InternalError, err)
 		return
 	}
 
-	fiberCtx.Status(http.StatusOK).JSON(progression)
+	utils.ReturnOk(fiberCtx, progression)
 }

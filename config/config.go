@@ -13,8 +13,9 @@ type (
 	}
 
 	App struct {
-		Port int    `env:"APP_PORT"`
-		Name string `env:"APP_NAME"`
+		Port    int    `env:"APP_PORT"`
+		Name    string `env:"APP_NAME"`
+		Version string `env:"APP_VERSION"`
 	}
 
 	Mongo struct {
@@ -33,14 +34,19 @@ type (
 	}
 )
 
+var config *Config
+
 func InitConfig() (*Config, error) {
 	cfg := &Config{}
 	if err := env.Parse(cfg); err != nil {
 		return nil, fmt.Errorf("config error: %w", err)
 	}
 
+	config = cfg
+
 	return cfg, nil
 }
 
-func GetEnvVar() {
+func GetAppVersion() string {
+	return config.App.Version
 }

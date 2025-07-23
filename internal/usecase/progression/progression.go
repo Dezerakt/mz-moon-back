@@ -17,10 +17,10 @@ func NewUsecase(progressionRepo repository.Progression) *Usecase {
 	}
 }
 
-func (obj *Usecase) GetProgression(ctx context.Context, noteId, moodId string) ([]progressionDmn.Progression, error) {
+func (obj *Usecase) GetProgression(ctx context.Context, rootNote, mood string) ([]progressionDmn.Progression, error) {
 	result, err := obj.progressionRepo.GetByParams(ctx, map[string]interface{}{
-		"rootNote": noteId,
-		"mood":     moodId,
+		"rootNote": rootNote,
+		"mood":     mood,
 	})
 	if err != nil {
 		return nil, errors.Wrap(err, "Progression Usecase. GetByParams: ")

@@ -17,6 +17,6 @@ type (
 	}
 
 	Progression interface {
-		GetProgression(ctx context.Context, noteId, moodId string) ([]progressionDmn.Progression, error)
+		GetProgression(ctx context.Context, rootNote, mood string) ([]progressionDmn.Progression, error)
 	}
 )

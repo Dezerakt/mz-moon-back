@@ -2,8 +2,9 @@ package v1
 
 import (
 	"accord-generator/internal/usecase"
+	"accord-generator/utils"
+	errVo "accord-generator/utils/error"
 	"github.com/gofiber/fiber"
-	"net/http"
 )
 
 type NoteRouter struct {
@@ -28,9 +29,9 @@ func (obj *NoteRouter) getNotes(fiberCtx *fiber.Ctx) {
 
 	notes, err := obj.noteUsecase.GetNotes(ctx)
 	if err != nil {
-		fiberCtx.Status(http.StatusBadRequest).JSON(err)
+		utils.ReturnError(fiberCtx, errVo.BadRequestError, err)
 		return
 	}
 
-	fiberCtx.Status(http.StatusOK).JSON(notes)
+	utils.ReturnOk(fiberCtx, notes)
 }

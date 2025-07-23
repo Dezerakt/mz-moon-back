@@ -2,8 +2,9 @@ package v1
 
 import (
 	"accord-generator/internal/usecase"
+	"accord-generator/utils"
+	errVo "accord-generator/utils/error"
 	"github.com/gofiber/fiber"
-	"net/http"
 )
 
 type MoodRouter struct {
@@ -28,9 +29,9 @@ func (obj *MoodRouter) getMoods(fiberCtx *fiber.Ctx) {
 
 	moods, err := obj.moodUsecase.GetMoods(ctx)
 	if err != nil {
-		fiberCtx.Status(http.StatusBadRequest).JSON(err)
+		utils.ReturnError(fiberCtx, errVo.BadRequestError, err)
 		return
 	}
 
-	fiberCtx.Status(http.StatusOK).JSON(moods)
+	utils.ReturnOk(fiberCtx, moods)
 }
