@@ -1,4 +1,4 @@
-module accord-generator
+module spotifykiller
 
 go 1.23.5
 

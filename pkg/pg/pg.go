@@ -1,11 +1,11 @@
 package pgPkg
 
 import (
-	"accord-generator/config"
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
+	"spotifykiller/config"
 )
 
 type PgWrap struct {

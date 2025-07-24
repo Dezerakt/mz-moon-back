@@ -1,10 +1,9 @@
 package utils
 
 import (
-	"accord-generator/config"
-	"accord-generator/utils/error"
 	"github.com/gofiber/fiber"
 	"net/http"
+	"spotifykiller/config"
 )
 
 func ReturnError(f *fiber.Ctx, customError errVo.CustomError, err error) {

@@ -1,13 +1,13 @@
 package mongoPkg
 
 import (
-	"accord-generator/config"
-	"accord-generator/vo"
 	"context"
 	"fmt"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 	"log"
+	"spotifykiller/config"
+	"spotifykiller/vo"
 )
 
 type Wrap struct {

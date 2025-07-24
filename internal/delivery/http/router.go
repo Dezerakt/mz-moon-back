@@ -1,17 +1,15 @@
 package httpDlv
 
 import (
-	"accord-generator/config"
-	v1 "accord-generator/internal/delivery/http/v1"
-	"accord-generator/internal/usecase"
 	"github.com/gofiber/fiber"
+	"spotifykiller/config"
+	v1 "spotifykiller/internal/delivery/http/v1"
+	"spotifykiller/internal/usecase"
 )
 
-func NewRouter(app *fiber.App, cfg *config.Config, container usecase.Dependencies) {
+func NewRouter(app *fiber.App, cfg *config.Config, song usecase.Song) {
 	apiV1Group := app.Group("/v1")
 	{
-		v1.NewMoodRouter(apiV1Group, container.Mood)
-		v1.NewNoteRouter(apiV1Group, container.Note)
-		v1.NewProgressionRouter(apiV1Group, container.Progression)
+		v1.NewSongRouter(apiV1Group, song)
 	}
 }
