@@ -51,3 +51,12 @@ func formatSongName(rawName string) string {
 
 	return formattedString
 }
+
+func (obj *Song) GetSongData(ctx context.Context, songId uint) (string, error) {
+	songEntity, err := obj.repository.GetMetaById(ctx, songId)
+	if err != nil {
+		return "", nil
+	}
+
+	return songEntity.FilePath, err
+}

@@ -2,6 +2,7 @@ package songRepo
 
 import (
 	"context"
+	"gorm.io/gorm"
 	"music-streaming/internal/domain/song"
 	"music-streaming/internal/repository"
 	pgPkg "music-streaming/pkg/pg"
@@ -28,4 +29,20 @@ func (obj *SongRepo) CreateNewMeta(ctx context.Context, songEntity *song.Entity,
 	}
 
 	return songModel.ID, err
+}
+
+func (obj *SongRepo) GetMetaById(ctx context.Context, songId uint) (*song.Entity, error) {
+	songModel := Song{}
+
+	err := obj.Db.Where(&Song{
+		Model: gorm.Model{
+			ID: songId,
+		},
+	}).First(&songModel).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return ToEntity(&songModel), nil
 }

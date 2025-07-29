@@ -23,7 +23,7 @@ services:
     environment:
       <<: *x-backend-app-environment
     build:
-      context: ./back
+      context: ./
       dockerfile: Dockerfile
     depends_on:
       - postgres

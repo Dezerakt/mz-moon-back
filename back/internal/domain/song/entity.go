@@ -2,6 +2,7 @@ package song
 
 type Entity struct {
 	SongName string
-	ArtistID int
-	GenreID  int
+	ArtistID uint
+	GenreID  uint
+	FilePath string
 }

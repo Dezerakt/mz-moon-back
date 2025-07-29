@@ -25,3 +25,12 @@ func ToModel(entity *song.Entity) *Song {
 		Name:     entity.SongName,
 	}
 }
+
+func ToEntity(model *Song) *song.Entity {
+	return &song.Entity{
+		SongName: model.Name,
+		ArtistID: model.ArtistID,
+		GenreID:  model.GenreID,
+		FilePath: model.FilePath,
+	}
+}

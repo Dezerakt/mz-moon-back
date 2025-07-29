@@ -2,6 +2,7 @@ package v1
 
 import (
 	"bytes"
+	"errors"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber"
 	"io"
@@ -9,6 +10,7 @@ import (
 	"music-streaming/internal/usecase"
 	"music-streaming/utils"
 	errVo "music-streaming/utils/error"
+	"strconv"
 )
 
 type SongRouter struct {
@@ -76,5 +78,29 @@ func (obj *SongRouter) upload(c *fiber.Ctx) {
 }
 
 func (obj *SongRouter) stream(c *fiber.Ctx) {
+	var (
+		ctx    = c.Context()
+		songId = c.Params("id")
+	)
 
+	if songId == "" {
+		utils.ReturnError(c, errVo.InvalidParams, errors.New("field `id` not found"))
+		return
+	}
+
+	songIdInt, err := strconv.ParseUint(songId, 10, 64)
+	if err != nil {
+		utils.ReturnError(c, errVo.InvalidParams, err)
+		return
+	}
+
+	filepath, err := obj.usecase.GetSongData(ctx, uint(songIdInt))
+	if err != nil {
+		return
+	}
+
+	c.Set("Content-Type", "audio/mpeg")
+	c.Set("Accept-Ranges", "bytes")
+
+	c.SendFile(filepath, true)
 }

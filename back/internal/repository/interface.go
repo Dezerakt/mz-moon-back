@@ -9,6 +9,7 @@ import (
 type (
 	ISong interface {
 		CreateNewMeta(ctx context.Context, songEntity *song.Entity, songPath string) (uint, error)
+		GetMetaById(ctx context.Context, songId uint) (*song.Entity, error)
 	}
 
 	IArtist interface {
