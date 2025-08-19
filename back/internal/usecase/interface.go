@@ -11,6 +11,7 @@ type (
 	ISong interface {
 		Upload(ctx context.Context, songEntity *song.Entity, buffer *bytes.Buffer) (uint, error)
 		GetSongData(ctx context.Context, songId uint) (string, error)
+		GetAllSongs(ctx context.Context) ([]song.Entity, error)
 	}
 
 	IArtist interface {

@@ -46,6 +46,20 @@ func SongMigration(wrap *pgPkg.PgWrap) {
 		log.Fatal(err)
 		return
 	}
+
+	songs := []*songRepo.Song{
+		{
+			Model: gorm.Model{
+				ID: 1,
+			},
+			ArtistID: 1,
+			GenreID:  1,
+			Name:     "benz truck",
+			FilePath: "/storage/song/benz_truck.mp3",
+		},
+	}
+
+	wrap.Db.Create(songs)
 }
 
 func GenreMigration(wrap *pgPkg.PgWrap) {

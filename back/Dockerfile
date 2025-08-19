@@ -27,5 +27,6 @@ COPY --from=builder /app/config /config
 COPY --from=builder /bin/migration /migration
 COPY --from=builder /bin/app /app
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=builder /app/storage /storage
 
 CMD ["/app"]

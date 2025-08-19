@@ -46,3 +46,19 @@ func (obj *SongRepo) GetMetaById(ctx context.Context, songId uint) (*song.Entity
 
 	return ToEntity(&songModel), nil
 }
+
+func (obj *SongRepo) GetAllSongs(ctx context.Context) ([]song.Entity, error) {
+	var modelSongs = make([]Song, 0)
+
+	err := obj.Db.Find(&modelSongs).Error
+	if err != nil {
+		return nil, err
+	}
+
+	var songsEntity = make([]song.Entity, 0)
+	for _, modelSong := range modelSongs {
+		songsEntity = append(songsEntity, *ToEntity(&modelSong))
+	}
+
+	return songsEntity, nil
+}

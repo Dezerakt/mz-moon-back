@@ -60,3 +60,12 @@ func (obj *Song) GetSongData(ctx context.Context, songId uint) (string, error) {
 
 	return songEntity.FilePath, err
 }
+
+func (obj *Song) GetAllSongs(ctx context.Context) ([]song.Entity, error) {
+	songs, err := obj.repository.GetAllSongs(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return songs, nil
+}

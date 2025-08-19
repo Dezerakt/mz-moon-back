@@ -8,7 +8,7 @@ import (
 )
 
 func NewRouter(app *fiber.App, cfg *config.Config, song usecase.ISong, artist usecase.IArtist) {
-	apiV1Group := app.Group("/v1")
+	apiV1Group := app.Group("/api/v1")
 	{
 		v1.NewSongRouter(apiV1Group, song)
 		v1.NewArtistRouter(apiV1Group, artist)

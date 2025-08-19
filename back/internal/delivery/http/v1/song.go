@@ -26,6 +26,7 @@ func NewSongRouter(router fiber.Router, usecase usecase.ISong) {
 	{
 		songGroup.Get("/:id", r.stream)
 		songGroup.Post("/upload", r.upload)
+		songGroup.Get("/", r.songs)
 	}
 }
 
@@ -103,4 +104,18 @@ func (obj *SongRouter) stream(c *fiber.Ctx) {
 	c.Set("Accept-Ranges", "bytes")
 
 	c.SendFile(filepath, true)
+}
+
+func (obj *SongRouter) songs(c *fiber.Ctx) {
+	var (
+		ctx = c.Context()
+	)
+
+	songs, err := obj.usecase.GetAllSongs(ctx)
+	if err != nil {
+		utils.ReturnError(c, errVo.BadRequestError, err)
+		return
+	}
+
+	utils.ReturnOk(c, songs)
 }
