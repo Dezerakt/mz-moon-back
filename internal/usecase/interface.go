@@ -1,20 +1,12 @@
 package usecase
 
 import (
-	"bytes"
 	"context"
-	"music-streaming/internal/domain/artist"
-	"music-streaming/internal/domain/song"
+	"mz-moon-back/internal/domain/catalog"
 )
 
 type (
-	ISong interface {
-		Upload(ctx context.Context, songEntity *song.Entity, buffer *bytes.Buffer) (uint, error)
-		GetSongData(ctx context.Context, songId uint) (string, error)
-		GetAllSongs(ctx context.Context) ([]song.Entity, error)
-	}
-
-	IArtist interface {
-		Create(ctx context.Context, artistEntity *artist.Entity) (uint, error)
+	ICatalog interface {
+		GetSongs(ctx context.Context) ([]catalog.Song, error)
 	}
 )

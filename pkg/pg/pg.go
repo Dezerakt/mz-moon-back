@@ -5,7 +5,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
-	"music-streaming/config"
+	"mz-moon-back/config"
 )
 
 type PgWrap struct {

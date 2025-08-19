@@ -2,18 +2,18 @@ package utils
 
 import (
 	"github.com/gofiber/fiber"
-	"music-streaming/config"
-	errVo "music-streaming/utils/error"
+	"mz-moon-back/config"
+	errVo "mz-moon-back/utils/error"
 	"net/http"
 )
 
-func ReturnError(f *fiber.Ctx, customError errVo.CustomError, err error) {
+func ReturnError(c *fiber.Ctx, customError errVo.CustomError, err error) {
 	storedError := errVo.Errors[customError]
 
 	storedError.Message = err.Error()
 	storedError.Type = customError
 
-	f.Status(storedError.HttpCode).JSON(storedError)
+	c.Status(storedError.HttpCode).JSON(storedError)
 }
 
 type SuccessResponse struct {
@@ -21,11 +21,11 @@ type SuccessResponse struct {
 	Data       interface{} `json:"data,omitempty"`
 }
 
-func ReturnOk(f *fiber.Ctx, data interface{}) {
+func ReturnOk(c *fiber.Ctx, data interface{}) {
 	successReponse := SuccessResponse{
 		AppVersion: config.GetAppVersion(),
 		Data:       data,
 	}
 
-	f.Status(http.StatusOK).JSON(successReponse)
+	c.Status(http.StatusOK).JSON(successReponse)
 }

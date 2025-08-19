@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber"
 	"log"
-	"music-streaming/config"
-	httpDlv "music-streaming/internal/delivery/http"
-	artistRepo "music-streaming/internal/repository/artist"
-	songRepo "music-streaming/internal/repository/song"
-	"music-streaming/internal/usecase"
-	pgPkg "music-streaming/pkg/pg"
+	"mz-moon-back/config"
+	httpDlv "mz-moon-back/internal/delivery/http"
+	artistRepo "mz-moon-back/internal/repository/artist"
+	songRepo "mz-moon-back/internal/repository/song"
+	"mz-moon-back/internal/usecase"
+	pgPkg "mz-moon-back/pkg/pg"
 )
 
 func main() {

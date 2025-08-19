@@ -1,4 +1,4 @@
-module music-streaming
+module mz-moon-back
 
 go 1.23.5
 

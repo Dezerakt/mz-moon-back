@@ -2,16 +2,17 @@ package httpDlv
 
 import (
 	"github.com/gofiber/fiber"
-	"music-streaming/config"
-	v1 "music-streaming/internal/delivery/http/v1"
-	"music-streaming/internal/usecase"
+	"mz-moon-back/config"
+	v1 "mz-moon-back/internal/delivery/http/v1"
+	"mz-moon-back/internal/usecase"
 )
 
-func NewRouter(app *fiber.App, cfg *config.Config, song usecase.ISong, artist usecase.IArtist) {
-	apiV1Group := app.Group("/api/v1")
+func NewRouter(app *fiber.App, cfg *config.Config, catalog usecase.ICatalog) {
+	apiGroup := app.Group("/api")
+
+	v1Group := apiGroup.Group("/v1")
 	{
-		v1.NewSongRouter(apiV1Group, song)
-		v1.NewArtistRouter(apiV1Group, artist)
+		v1.NewCatalogRouter(v1Group, catalog)
 	}
 
 	app.Use(func(c *fiber.Ctx) {

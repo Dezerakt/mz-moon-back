@@ -11,7 +11,7 @@ x-backend-app-environment: &x-backend-app-environment
   # App
   <<: *x-db-environment
 
-  APP_NAME: "music-streaming"
+  APP_NAME: "mz-moon-back"
   APP_VERSION: "1.0.0"
   APP_PORT: 8080
 

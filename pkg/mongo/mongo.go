@@ -6,8 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 	"log"
-	"music-streaming/config"
-	"music-streaming/vo"
+	"mz-moon-back/config"
+	"mz-moon-back/vo"
 )
 
 type Wrap struct {

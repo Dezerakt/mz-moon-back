@@ -3,11 +3,11 @@ package main
 import (
 	"gorm.io/gorm"
 	"log"
-	"music-streaming/config"
-	artistRepo "music-streaming/internal/repository/artist"
-	genreRepo "music-streaming/internal/repository/genre"
-	songRepo "music-streaming/internal/repository/song"
-	pgPkg "music-streaming/pkg/pg"
+	"mz-moon-back/config"
+	artistRepo "mz-moon-back/internal/repository/artist"
+	genreRepo "mz-moon-back/internal/repository/genre"
+	songRepo "mz-moon-back/internal/repository/song"
+	pgPkg "mz-moon-back/pkg/pg"
 )
 
 func main() {
