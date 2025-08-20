@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/gofiber/fiber"
 	"log"
 	"mz-moon-back/config"
 	httpDlv "mz-moon-back/internal/delivery/http"
-	artistRepo "mz-moon-back/internal/repository/artist"
-	songRepo "mz-moon-back/internal/repository/song"
+	"mz-moon-back/internal/repository/catalog/postgre"
 	"mz-moon-back/internal/usecase"
 	pgPkg "mz-moon-back/pkg/pg"
+
+	"github.com/gofiber/fiber"
 )
 
 func main() {
@@ -23,15 +23,19 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// connection objects
+	pgConnection := pgPkg.NewPgConnection(cfg.Postgres)
+
 	// repositories, web-api etc
-	pg := pgPkg.NewPgConnection(cfg.Postgres)
+	songRepo := postgre.NewSong(pgConnection)
+	artistRepo := postgre.NewArtist(pgConnection)
+	genreRepo := postgre.NewGenre(pgConnection)
 
 	// usecases
-	songUsecase := usecase.NewSongUsecase(songRepo.NewSongRepo(pg))
-	artistUsecase := usecase.NewArtistUsecase(artistRepo.NewArtistRepo(pg))
+	catalogUsecase := usecase.NewCatalog(songRepo, artistRepo, genreRepo)
 
 	// server
-	httpDlv.NewRouter(app, cfg, songUsecase, artistUsecase)
+	httpDlv.NewRouter(app, cfg, catalogUsecase)
 
 	for _, r := range app.Routes() {
 		fmt.Printf("%s\t%s\n", r.Method, r.Path)

@@ -2,17 +2,18 @@ package pgPkg
 
 import (
 	"fmt"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 	"log"
 	"mz-moon-back/config"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-type PgWrap struct {
+type Wrap struct {
 	Db *gorm.DB
 }
 
-func NewPgConnection(dbCfg config.Postgres) *PgWrap {
+func NewPgConnection(dbCfg config.Postgres) *Wrap {
 	connectionString := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		dbCfg.Host, dbCfg.User, dbCfg.Password, dbCfg.Db, dbCfg.Port)
 
@@ -22,7 +23,7 @@ func NewPgConnection(dbCfg config.Postgres) *PgWrap {
 	}
 
 	log.Println("Connected to PostgreSQL successfully")
-	return &PgWrap{
+	return &Wrap{
 		Db: db,
 	}
 }

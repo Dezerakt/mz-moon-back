@@ -1,32 +1,29 @@
-# Step 1: Modules caching
+# Step 1: Modules caching + Air install
 FROM golang:1.24.5-alpine3.21 as modules
 
-COPY go.mod go.sum /modules/
-
 WORKDIR /modules
-
-RUN go mod download
+COPY go.mod go.sum ./
+RUN go mod download && \
+    go install github.com/air-verse/air@latest
 
 # Step 2: Builder
 FROM golang:1.24.5-alpine3.21 as builder
 
-COPY --from=modules /go/pkg /go/pkg
-COPY . /app
-
 WORKDIR /app
+COPY --from=modules /go/bin/air /usr/local/bin/air
+COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -o /bin/app ./ && \
     go build -o /bin/migration ./migration && \
     chmod +x /bin/app /bin/migration
 
-# Step 3: Final
+# Step 3: Final runtime image
 FROM alpine:3.21
 
 COPY --from=builder /app/config /config
-COPY --from=builder /bin/migration /migration
-COPY --from=builder /bin/app /app
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app/storage /storage
+COPY --from=builder /bin/app /bin/app
+COPY --from=builder /bin/migration /bin/migration
 
-CMD ["/app"]
+CMD ["/bin/app"]

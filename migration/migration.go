@@ -1,12 +1,12 @@
 package main
 
 import (
-	"gorm.io/gorm"
 	"log"
 	"mz-moon-back/config"
-	artistRepo "mz-moon-back/internal/repository/artist"
-	genreRepo "mz-moon-back/internal/repository/genre"
-	songRepo "mz-moon-back/internal/repository/song"
+	"mz-moon-back/internal/repository/models"
+
+	"gorm.io/gorm"
+
 	pgPkg "mz-moon-back/pkg/pg"
 )
 
@@ -22,70 +22,37 @@ func main() {
 
 	pgWrap := pgPkg.NewPgConnection(cfg.Postgres)
 
-	ArtistMigrate(pgWrap)
-	GenreMigration(pgWrap)
-	SongMigration(pgWrap)
+	CatalogMigration(pgWrap)
 
 	log.Println("Migration ended")
 }
 
-func SongMigration(wrap *pgPkg.PgWrap) {
+func CatalogMigration(wrap *pgPkg.Wrap) {
 	log.Println("Start `Song` model migration")
 	defer log.Println("`Song` model migration ended")
 
-	model := &songRepo.Song{}
+	songModel := &models.Song{}
+	artistModel := &models.Artist{}
+	genreModel := &models.Genre{}
 
-	err := wrap.Db.Migrator().DropTable(model)
+	err := wrap.Db.Migrator().DropTable(songModel, artistModel, genreModel)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 
-	err = wrap.Db.Migrator().AutoMigrate(model)
+	err = wrap.Db.Migrator().AutoMigrate(songModel, artistModel, genreModel)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 
-	songs := []*songRepo.Song{
+	genre := []models.Genre{
 		{
 			Model: gorm.Model{
 				ID: 1,
 			},
-			ArtistID: 1,
-			GenreID:  1,
-			Name:     "benz truck",
-			FilePath: "/storage/song/benz_truck.mp3",
-		},
-	}
-
-	wrap.Db.Create(songs)
-}
-
-func GenreMigration(wrap *pgPkg.PgWrap) {
-	log.Println("Start `Genre` model migration")
-	defer log.Println("`Genre` model migration ended")
-
-	model := &genreRepo.Genre{}
-
-	err := wrap.Db.Migrator().DropTable(model)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	err = wrap.Db.Migrator().AutoMigrate(model)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	genres := []*genreRepo.Genre{
-		{
-			Model: gorm.Model{
-				ID: 1,
-			},
-			Name: "rap",
+			Name: "trap",
 		},
 		{
 			Model: gorm.Model{
@@ -97,51 +64,44 @@ func GenreMigration(wrap *pgPkg.PgWrap) {
 			Model: gorm.Model{
 				ID: 3,
 			},
-			Name: "break beat",
+			Name: "breakcore",
 		},
 	}
 
-	wrap.Db.Create(genres)
-}
-
-func ArtistMigrate(wrap *pgPkg.PgWrap) {
-	log.Println("Start `Artist` model migration")
-	defer log.Println("`Artist` model migration ended")
-
-	model := &artistRepo.Artist{}
-
-	err := wrap.Db.Migrator().DropTable(model)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	err = wrap.Db.Migrator().AutoMigrate(model)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	artist := []*artistRepo.Artist{
+	artist := []models.Artist{
 		{
 			Model: gorm.Model{
 				ID: 1,
 			},
-			AristName: "lil peep",
+			Name: "Nirvana",
 		},
 		{
 			Model: gorm.Model{
 				ID: 2,
 			},
-			AristName: "hazzequill",
+			Name: "hazzequill",
 		},
 		{
 			Model: gorm.Model{
 				ID: 3,
 			},
-			AristName: "Nirvana",
+			Name: "lil peep",
 		},
 	}
 
-	wrap.Db.Create(artist)
+	songs := []models.Song{
+		{
+			Model: gorm.Model{
+				ID: 1,
+			},
+			ArtistID: 3,
+			GenreID:  1,
+			Name:     "benz truck",
+			//FilePath: "/storage/song/benz_truck.mp3",
+		},
+	}
+
+	wrap.Db.Create(&genre)
+	wrap.Db.Create(&artist)
+	wrap.Db.Create(&songs)
 }
