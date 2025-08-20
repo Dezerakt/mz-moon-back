@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"context"
-	"fmt"
 	"mz-moon-back/internal/domain/catalog"
 	"mz-moon-back/internal/repository"
 )
@@ -22,7 +21,10 @@ func NewCatalog(songRepo repository.ISong, artistRepo repository.IArtist, genreR
 }
 
 func (obj *Catalog) GetSongs(ctx context.Context) ([]catalog.Song, error) {
-	fmt.Println("dfdfdf")
+	songs, err := obj.songRepo.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
 
-	return nil, nil
+	return songs, nil
 }

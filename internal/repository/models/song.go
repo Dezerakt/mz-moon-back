@@ -1,6 +1,8 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type Song struct {
 	gorm.Model
@@ -11,4 +13,8 @@ type Song struct {
 
 	Genre  Genre  `gorm:"foreignKey:GenreID"`
 	Artist Artist `gorm:"foreignKey:ArtistID"`
+}
+
+func (Song) Join() string {
+	return "Song"
 }

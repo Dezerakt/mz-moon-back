@@ -1,10 +1,12 @@
 package v1
 
 import (
-	"github.com/gofiber/fiber"
+	"mz-moon-back/internal/delivery/http/v1/response"
 	"mz-moon-back/internal/usecase"
 	"mz-moon-back/utils"
 	errVo "mz-moon-back/utils/error"
+
+	"github.com/gofiber/fiber"
 )
 
 type CatalogRouter struct {
@@ -18,20 +20,29 @@ func NewCatalogRouter(router fiber.Router, usecase usecase.ICatalog) {
 
 	catalogGroup := router.Group("/catalog")
 	{
-		catalogGroup.Get("/song", r.getSongs)
+		catalogGroup.Get("/song", r.getAllSongs)
 	}
 }
 
-func (obj *CatalogRouter) getSongs(c *fiber.Ctx) {
+func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 	var (
 		ctx = c.Context()
 	)
 
-	songs, err := obj.u.GetSongs(ctx)
+	entitySongs, err := obj.u.GetSongs(ctx)
 	if err != nil {
 		utils.ReturnError(c, errVo.InvalidParams, err)
 		return
 	}
 
-	utils.ReturnOk(c, songs)
+	var responseSongs []response.GetAllSongs
+	for _, entitySong := range entitySongs {
+		responseSongs = append(responseSongs, response.GetAllSongs{
+			Song:  entitySong.SongName,
+			Arist: entitySong.Artist,
+			Genre: entitySong.Genre,
+		})
+	}
+
+	utils.ReturnOk(c, responseSongs)
 }

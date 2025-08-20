@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     chmod +x /bin/app /bin/migration
 
 # Step 3: Final runtime image
-FROM alpine:3.21
+FROM cosmtrek/air
 
 COPY --from=builder /app/config /config
 COPY --from=builder /app/storage /storage
