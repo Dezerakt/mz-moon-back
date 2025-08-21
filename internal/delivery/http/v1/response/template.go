@@ -1,13 +1,14 @@
-package utils
+package response
 
 import (
-	"github.com/gofiber/fiber"
 	"mz-moon-back/config"
 	errVo "mz-moon-back/utils/error"
 	"net/http"
+
+	"github.com/gofiber/fiber"
 )
 
-func ReturnError(c *fiber.Ctx, customError errVo.CustomError, err error) {
+func Error(c *fiber.Ctx, customError errVo.CustomError, err error) {
 	storedError := errVo.Errors[customError]
 
 	storedError.Message = err.Error()
@@ -21,7 +22,7 @@ type SuccessResponse struct {
 	Data       interface{} `json:"data,omitempty"`
 }
 
-func ReturnOk(c *fiber.Ctx, data interface{}) {
+func Ok(c *fiber.Ctx, data interface{}) {
 	successReponse := SuccessResponse{
 		AppVersion: config.GetAppVersion(),
 		Data:       data,

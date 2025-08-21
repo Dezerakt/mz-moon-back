@@ -5,7 +5,8 @@ import (
 	"log"
 	"mz-moon-back/config"
 	httpDlv "mz-moon-back/internal/delivery/http"
-	"mz-moon-back/internal/repository/catalog/postgre"
+	catalogPg "mz-moon-back/internal/repository/catalog/postgre"
+	mediaPg "mz-moon-back/internal/repository/media/postgre"
 	"mz-moon-back/internal/usecase"
 	pgPkg "mz-moon-back/pkg/pg"
 
@@ -27,15 +28,18 @@ func main() {
 	pgConnection := pgPkg.NewPgConnection(cfg.Postgres)
 
 	// repositories, web-api etc
-	songRepo := postgre.NewSong(pgConnection)
-	artistRepo := postgre.NewArtist(pgConnection)
-	genreRepo := postgre.NewGenre(pgConnection)
+	songRepo := catalogPg.NewSong(pgConnection)
+	artistRepo := catalogPg.NewArtist(pgConnection)
+	genreRepo := catalogPg.NewGenre(pgConnection)
+	trackRepo := mediaPg.NewTrack(pgConnection)
+	coverRepo := mediaPg.NewCover(pgConnection)
 
 	// usecases
 	catalogUsecase := usecase.NewCatalog(songRepo, artistRepo, genreRepo)
+	mediaUsecase := usecase.NewMedia(trackRepo, coverRepo)
 
 	// server
-	httpDlv.NewRouter(app, cfg, catalogUsecase)
+	httpDlv.NewRouter(app, cfg, catalogUsecase, mediaUsecase)
 
 	for _, r := range app.Routes() {
 		fmt.Printf("%s\t%s\n", r.Method, r.Path)

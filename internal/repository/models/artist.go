@@ -7,7 +7,3 @@ type Artist struct {
 
 	Name string `gorm:"size:255"`
 }
-
-func (Artist) Join() string {
-	return "Artist"
-}

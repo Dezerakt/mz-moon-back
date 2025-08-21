@@ -5,18 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c54b380f-fc6e-4fe0-9442-09883ff25fa4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/delivery/http/v1/request/catalog.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/delivery/http/v1/response/catalog.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/delivery/http/v1/media.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/delivery/http/v1/response/template.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/media/postgre/cover.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/media/postgre/track.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/models/cover.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/models/track.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/usecase/media.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/delivery/http/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/delivery/http/v1/catalog.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/v1/catalog.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/catalog/song.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/catalog/song.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/media/cover.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/media/cover.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/media/track.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/media/track.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/catalog/postgre/song.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/catalog/postgre/song.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/interface.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/artist.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/artist.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/genre.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/genre.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/song.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/song.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/usecase/catalog.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/catalog.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/migration/migration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/song/benz_truck.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/build-errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/build-errors.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/main" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/main" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/http.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +49,25 @@
   <component name="GOROOT" url="file://$PROJECT_DIR$/../../sdk/go1.23.7" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dezerakt&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dezerakt/mz-moon-back.git&quot;,
+    &quot;accountId&quot;: &quot;c869a034-acfd-4589-829f-501e400b0bd7&quot;
+  }
+}</component>
+  <component name="GoLibraries">
+    <option name="urls">
+      <list>
+        <option value="file://$PROJECT_DIR$/.." />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -61,6 +96,7 @@
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;configurable..is.expanded&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
@@ -68,17 +104,17 @@
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.goide.configuration.GoLibrariesConfigurableProvider&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/repository/media/postgre" />
       <recent name="$PROJECT_DIR$/internal/repository/catalog/mongo" />
       <recent name="$PROJECT_DIR$/internal/repository/catalog" />
       <recent name="C:\Developing\music-streaming\back\storage\song" />
       <recent name="C:\Developing\music-streaming\back" />
-      <recent name="C:\Developing\music-streaming\back\internal\usecase" />
     </key>
   </component>
   <component name="RunManager">

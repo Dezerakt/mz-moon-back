@@ -3,7 +3,6 @@ package v1
 import (
 	"mz-moon-back/internal/delivery/http/v1/response"
 	"mz-moon-back/internal/usecase"
-	"mz-moon-back/utils"
 	errVo "mz-moon-back/utils/error"
 
 	"github.com/gofiber/fiber"
@@ -18,9 +17,9 @@ func NewCatalogRouter(router fiber.Router, usecase usecase.ICatalog) {
 		u: usecase,
 	}
 
-	catalogGroup := router.Group("/catalog")
+	catalogRouter := router.Group("/catalog")
 	{
-		catalogGroup.Get("/song", r.getAllSongs)
+		catalogRouter.Get("/song", r.getAllSongs)
 	}
 }
 
@@ -31,7 +30,7 @@ func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 
 	entitySongs, err := obj.u.GetSongs(ctx)
 	if err != nil {
-		utils.ReturnError(c, errVo.InvalidParams, err)
+		response.Error(c, errVo.InvalidParams, err)
 		return
 	}
 
@@ -44,5 +43,5 @@ func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 		})
 	}
 
-	utils.ReturnOk(c, responseSongs)
+	response.Ok(c, responseSongs)
 }

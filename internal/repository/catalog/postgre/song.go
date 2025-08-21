@@ -22,8 +22,8 @@ func (obj *Song) GetAll(ctx context.Context) ([]catalog.Song, error) {
 	var songModels []models.Song
 
 	tx := obj.Db.
-		Joins(models.Artist{}.Join()).
-		Joins(models.Genre{}.Join()).
+		Joins("Arist").
+		Joins("Genre").
 		Find(&songModels)
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -35,6 +35,7 @@ func (obj *Song) GetAll(ctx context.Context) ([]catalog.Song, error) {
 			SongName: model.Name,
 			Artist:   model.Artist.Name,
 			Genre:    model.Genre.Name,
+			UUID:     model.UUID,
 		})
 	}
 
