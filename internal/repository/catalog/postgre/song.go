@@ -22,7 +22,7 @@ func (obj *Song) GetAll(ctx context.Context) ([]catalog.Song, error) {
 	var songModels []models.Song
 
 	tx := obj.Db.
-		Joins("Arist").
+		Joins("Artist").
 		Joins("Genre").
 		Find(&songModels)
 	if tx.Error != nil {

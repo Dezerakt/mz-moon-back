@@ -3,12 +3,15 @@ package httpDlv
 import (
 	"mz-moon-back/config"
 	v1 "mz-moon-back/internal/delivery/http/v1"
+	"mz-moon-back/internal/delivery/http/v1/middlewares"
 	"mz-moon-back/internal/usecase"
 
 	"github.com/gofiber/fiber"
 )
 
 func NewRouter(app *fiber.App, cfg *config.Config, catalog usecase.ICatalog, media usecase.IMedia) {
+	app.Use(middlewares.Cors)
+
 	apiGroup := app.Group("/api")
 
 	v1Group := apiGroup.Group("/v1")

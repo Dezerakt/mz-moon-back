@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+
 	"github.com/caarlos0/env/v11"
 )
 
@@ -10,6 +11,10 @@ type (
 		App      App
 		Postgres Postgres
 		Mongo    Mongo
+		Http     Http
+	}
+	Http struct {
+		TrustedOrigins []string `env:"HTTP_TRUSTED_ORIGINS" envDefault:"https://localhost"`
 	}
 
 	App struct {
@@ -50,3 +55,5 @@ func InitConfig() (*Config, error) {
 func GetAppVersion() string {
 	return config.App.Version
 }
+
+func GetTrustedOrigins() []string { return config.Http.TrustedOrigins }

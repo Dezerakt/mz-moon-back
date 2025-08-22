@@ -40,6 +40,7 @@ func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 			Song:  entitySong.SongName,
 			Arist: entitySong.Artist,
 			Genre: entitySong.Genre,
+			UUID:  entitySong.UUID,
 		})
 	}
 
