@@ -3,6 +3,6 @@ package media
 import "github.com/google/uuid"
 
 type Cover struct {
-	UUID uuid.UUID `gorm:"type:uuid"`
-	Path string    `gorm:"size:255"`
+	UUID uuid.UUID
+	Path string
 }

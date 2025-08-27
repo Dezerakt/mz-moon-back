@@ -8,3 +8,8 @@ type GetAllSongs struct {
 	Genre string    `json:"genre,omitempty" validate:"required"`
 	UUID  uuid.UUID `json:"uuid,omitempty" validate:"required"`
 }
+
+type GetAllGenres struct {
+	Name string `json:"name"`
+	UUID string `json:"id"`
+}

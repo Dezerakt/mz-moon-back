@@ -20,7 +20,30 @@ func NewCatalogRouter(router fiber.Router, usecase usecase.ICatalog) {
 	catalogRouter := router.Group("/catalog")
 	{
 		catalogRouter.Get("/song", r.getAllSongs)
+		catalogRouter.Get("/genre", r.getAllGenres)
 	}
+}
+
+func (obj *CatalogRouter) getAllGenres(c *fiber.Ctx) {
+	var (
+		ctx = c.Context()
+	)
+
+	genres, err := obj.u.GetGenres(ctx)
+	if err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+
+	var resp []response.GetAllGenres
+	for _, genreEl := range genres {
+		resp = append(resp, response.GetAllGenres{
+			Name: genreEl.Name,
+			UUID: genreEl.UUID.String(),
+		})
+	}
+
+	response.Ok(c, resp)
 }
 
 func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
@@ -28,21 +51,21 @@ func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 		ctx = c.Context()
 	)
 
-	entitySongs, err := obj.u.GetSongs(ctx)
+	songs, err := obj.u.GetSongs(ctx)
 	if err != nil {
 		response.Error(c, errVo.InvalidParams, err)
 		return
 	}
 
-	var responseSongs []response.GetAllSongs
-	for _, entitySong := range entitySongs {
-		responseSongs = append(responseSongs, response.GetAllSongs{
-			Song:  entitySong.SongName,
-			Arist: entitySong.Artist,
-			Genre: entitySong.Genre,
-			UUID:  entitySong.UUID,
+	var resp []response.GetAllSongs
+	for _, songsEl := range songs {
+		resp = append(resp, response.GetAllSongs{
+			Song:  songsEl.SongName,
+			Arist: songsEl.Artist,
+			Genre: songsEl.Genre,
+			UUID:  songsEl.UUID,
 		})
 	}
 
-	response.Ok(c, responseSongs)
+	response.Ok(c, resp)
 }

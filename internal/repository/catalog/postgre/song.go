@@ -31,12 +31,7 @@ func (obj *Song) GetAll(ctx context.Context) ([]catalog.Song, error) {
 
 	var result []catalog.Song
 	for _, model := range songModels {
-		result = append(result, catalog.Song{
-			SongName: model.Name,
-			Artist:   model.Artist.Name,
-			Genre:    model.Genre.Name,
-			UUID:     model.UUID,
-		})
+		result = append(result, model.ToEntity())
 	}
 
 	return result, nil

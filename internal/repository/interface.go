@@ -14,6 +14,7 @@ type (
 	}
 
 	IGenre interface {
+		GetAll(ctx context.Context) ([]catalog.Genre, error)
 	}
 
 	IArtist interface {

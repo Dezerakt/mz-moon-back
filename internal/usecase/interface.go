@@ -12,6 +12,7 @@ import (
 type (
 	ICatalog interface {
 		GetSongs(ctx context.Context) ([]catalog.Song, error)
+		GetGenres(ctx context.Context) ([]catalog.Genre, error)
 	}
 
 	IMedia interface {

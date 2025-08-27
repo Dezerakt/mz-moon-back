@@ -28,3 +28,12 @@ func (obj *Catalog) GetSongs(ctx context.Context) ([]catalog.Song, error) {
 
 	return songs, nil
 }
+
+func (obj *Catalog) GetGenres(ctx context.Context) ([]catalog.Genre, error) {
+	genres, err := obj.genreRepo.GetAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return genres, nil
+}
