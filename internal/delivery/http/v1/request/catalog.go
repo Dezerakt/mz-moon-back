@@ -1,7 +1,13 @@
 package request
 
-type SongRequest struct {
-	SongName string `json:"songName,omitempty" validate:"required"`
-	ArtistID uint   `json:"artistID,omitempty" validate:"required"`
-	GenreID  uint   `json:"genreID,omitempty" validate:"required"`
+import "mz-moon-back/internal/domain/catalog"
+
+type NewGenre struct {
+	Name string `json:"name" validate:"required"`
+}
+
+func (req *NewGenre) ToEntity() *catalog.Genre {
+	return &catalog.Genre{
+		Name: req.Name,
+	}
 }

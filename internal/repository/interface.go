@@ -15,6 +15,7 @@ type (
 
 	IGenre interface {
 		GetAll(ctx context.Context) ([]catalog.Genre, error)
+		NewGenre(ctx context.Context, genre *catalog.Genre) error
 	}
 
 	IArtist interface {
@@ -26,5 +27,6 @@ type (
 
 	ICover interface {
 		GetCover(ctx context.Context, uuid uuid.UUID) (*media.Cover, error)
+		NewCover(ctx context.Context, cover *media.Cover) error
 	}
 )

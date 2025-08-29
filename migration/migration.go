@@ -59,7 +59,7 @@ func CatalogMigration(wrap *pgPkg.Wrap) {
 			Model: gorm.Model{
 				ID: 1,
 			},
-			Name: "trap",
+			Name: "drum&bass",
 		},
 		{
 			Model: gorm.Model{

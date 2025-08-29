@@ -1,27 +1,64 @@
 package v1
 
 import (
+	"mz-moon-back/internal/delivery/http/v1/request"
 	"mz-moon-back/internal/delivery/http/v1/response"
 	"mz-moon-back/internal/usecase"
 	errVo "mz-moon-back/utils/error"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber"
 )
 
 type CatalogRouter struct {
-	u usecase.ICatalog
+	u         usecase.ICatalog
+	validator *validator.Validate
 }
 
 func NewCatalogRouter(router fiber.Router, usecase usecase.ICatalog) {
 	r := CatalogRouter{
-		u: usecase,
+		u:         usecase,
+		validator: validator.New(validator.WithRequiredStructEnabled()),
 	}
 
 	catalogRouter := router.Group("/catalog")
 	{
-		catalogRouter.Get("/song", r.getAllSongs)
-		catalogRouter.Get("/genre", r.getAllGenres)
+		songRouter := catalogRouter.Group("/song")
+		{
+			songRouter.Get("/", r.getAllSongs)
+		}
+
+		genreRouter := catalogRouter.Group("/genre")
+		{
+			genreRouter.Get("/", r.getAllGenres)
+			genreRouter.Put("/", r.newGenre)
+		}
 	}
+}
+
+func (obj *CatalogRouter) newGenre(c *fiber.Ctx) {
+	var (
+		ctx  = c.Context()
+		body request.NewGenre
+	)
+
+	if err := c.BodyParser(&body); err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+
+	if err := obj.validator.StructCtx(ctx, &body); err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+
+	err := obj.u.NewGenre(ctx, body.ToEntity())
+	if err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+
+	response.Ok(c, nil)
 }
 
 func (obj *CatalogRouter) getAllGenres(c *fiber.Ctx) {
@@ -39,7 +76,6 @@ func (obj *CatalogRouter) getAllGenres(c *fiber.Ctx) {
 	for _, genreEl := range genres {
 		resp = append(resp, response.GetAllGenres{
 			Name: genreEl.Name,
-			UUID: genreEl.UUID.String(),
 		})
 	}
 
@@ -63,7 +99,6 @@ func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 			Song:  songsEl.SongName,
 			Arist: songsEl.Artist,
 			Genre: songsEl.Genre,
-			UUID:  songsEl.UUID,
 		})
 	}
 

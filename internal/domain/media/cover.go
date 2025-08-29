@@ -1,8 +1,15 @@
 package media
 
-import "github.com/google/uuid"
+type ContentTypeID uint
+
+const (
+	SongCover ContentTypeID = iota
+	GenreCover
+	ProfilePicture
+)
 
 type Cover struct {
-	UUID uuid.UUID
-	Path string
+	ContentTypeID ContentTypeID
+	ForeignID     uint
+	Path          string
 }

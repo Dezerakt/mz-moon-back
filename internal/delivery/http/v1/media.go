@@ -27,8 +27,13 @@ func NewMediaRouter(router fiber.Router, usecase usecase.IMedia) {
 		coverGroup := mediaRouter.Group("/cover")
 		{
 			coverGroup.Get("/:uuid", r.getCover)
+			coverGroup.Put("/", r.newCover)
 		}
 	}
+}
+
+func (obj *MediaRouter) newCover(c *fiber.Ctx) {
+
 }
 
 func (obj *MediaRouter) getCover(c *fiber.Ctx) {

@@ -37,3 +37,12 @@ func (obj *Catalog) GetGenres(ctx context.Context) ([]catalog.Genre, error) {
 
 	return genres, nil
 }
+
+func (obj *Catalog) NewGenre(ctx context.Context, genre *catalog.Genre) error {
+	err := obj.genreRepo.NewGenre(ctx, genre)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

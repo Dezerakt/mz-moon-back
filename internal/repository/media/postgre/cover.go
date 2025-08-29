@@ -29,7 +29,16 @@ func (obj *Cover) GetCover(ctx context.Context, uuid uuid.UUID) (*media.Cover, e
 	}
 
 	return &media.Cover{
-		UUID: cover.UUID,
 		Path: cover.Path,
 	}, nil
+}
+
+func (obj *Cover) NewCover(ctx context.Context, cover *media.Cover) error {
+	tx := obj.Db.Create(cover)
+
+	if tx.Error != nil {
+		return tx.Error
+	}
+
+	return nil
 }

@@ -33,3 +33,12 @@ func (obj *Genre) GetAll(ctx context.Context) ([]catalog.Genre, error) {
 
 	return result, nil
 }
+
+func (obj *Genre) NewGenre(ctx context.Context, genre *catalog.Genre) error {
+	tx := obj.Db.Create(models.ToModel(genre))
+	if tx.Error != nil {
+		return tx.Error
+	}
+
+	return nil
+}
