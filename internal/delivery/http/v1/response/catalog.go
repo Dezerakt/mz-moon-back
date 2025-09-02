@@ -10,6 +10,7 @@ type GetAllSongs struct {
 }
 
 type GetAllGenres struct {
-	Name string `json:"name"`
-	UUID string `json:"id"`
+	Name string    `json:"name"`
+	UUID uuid.UUID `json:"uuid"`
+	ID   uint      `json:"id"`
 }

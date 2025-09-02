@@ -3,6 +3,8 @@ package usecase
 import (
 	"bytes"
 	"context"
+	"fmt"
+	"mz-moon-back/internal/domain/media"
 	"mz-moon-back/internal/repository"
 	"os"
 
@@ -23,6 +25,7 @@ func NewMedia(trackRepo repository.ITrack, coverRepo repository.ICover) IMedia {
 
 var (
 	ownerReadPerm os.FileMode = 0400
+	coverStorage              = "/storage/song"
 )
 
 func (obj *Media) GetTrack(ctx context.Context, songUUID uuid.UUID) (*os.File, error) {
@@ -31,7 +34,7 @@ func (obj *Media) GetTrack(ctx context.Context, songUUID uuid.UUID) (*os.File, e
 		return nil, err
 	}
 
-	trackFile, err := os.OpenFile(trackData.Path, os.O_RDONLY, ownerReadPerm)
+	trackFile, err := os.OpenFile(fmt.Sprintf("%s/%s.mp3", coverStorage, trackData.UUID), os.O_RDONLY, ownerReadPerm)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +48,7 @@ func (obj *Media) GetTrackCover(ctx context.Context, songUUID uuid.UUID) (*bytes
 		return nil, err
 	}
 
-	coverFile, err := os.OpenFile(coverData.Path, os.O_RDONLY, ownerReadPerm)
+	coverFile, err := os.OpenFile(fmt.Sprintf("%s/song_%s.jpeg", coverStorage, coverData.ForeignUUID), os.O_RDONLY, ownerReadPerm)
 	if err != nil {
 		return nil, err
 	}
@@ -57,4 +60,9 @@ func (obj *Media) GetTrackCover(ctx context.Context, songUUID uuid.UUID) (*bytes
 	}
 
 	return buffer, nil
+}
+
+func (obj *Media) UpdateCover(ctx context.Context, cover *media.Cover, fileContent bytes.Buffer) error {
+	
+	return nil
 }

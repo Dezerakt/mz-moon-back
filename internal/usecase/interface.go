@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"mz-moon-back/internal/domain/catalog"
+	"mz-moon-back/internal/domain/media"
 	"os"
 
 	"github.com/google/uuid"
@@ -19,5 +20,6 @@ type (
 	IMedia interface {
 		GetTrack(ctx context.Context, songUUID uuid.UUID) (*os.File, error)
 		GetTrackCover(ctx context.Context, songUUID uuid.UUID) (*bytes.Buffer, error)
+		UpdateCover(ctx context.Context, cover *media.Cover, fileContent bytes.Buffer) error
 	}
 )

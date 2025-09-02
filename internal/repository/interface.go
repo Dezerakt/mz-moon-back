@@ -26,6 +26,7 @@ type (
 	}
 
 	ICover interface {
+		UpdateCover(ctx context.Context, cover *media.Cover) error
 		GetCover(ctx context.Context, uuid uuid.UUID) (*media.Cover, error)
 		NewCover(ctx context.Context, cover *media.Cover) error
 	}

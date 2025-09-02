@@ -76,6 +76,8 @@ func (obj *CatalogRouter) getAllGenres(c *fiber.Ctx) {
 	for _, genreEl := range genres {
 		resp = append(resp, response.GetAllGenres{
 			Name: genreEl.Name,
+			UUID: genreEl.UUID,
+			ID:   genreEl.ID,
 		})
 	}
 
@@ -99,6 +101,7 @@ func (obj *CatalogRouter) getAllSongs(c *fiber.Ctx) {
 			Song:  songsEl.SongName,
 			Arist: songsEl.Artist,
 			Genre: songsEl.Genre,
+			UUID:  songsEl.UUID,
 		})
 	}
 

@@ -30,6 +30,5 @@ func (obj *Track) GetTrack(ctx context.Context, uuid uuid.UUID) (*media.Track, e
 
 	return &media.Track{
 		UUID: track.UUID,
-		Path: track.Path,
 	}, nil
 }

@@ -9,5 +9,4 @@ type Track struct {
 	gorm.Model
 
 	UUID uuid.UUID `gorm:"type:uuid"`
-	Path string    `gorm:"size:255"`
 }

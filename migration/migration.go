@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"mz-moon-back/config"
 	"mz-moon-back/internal/repository/models"
@@ -59,18 +58,21 @@ func CatalogMigration(wrap *pgPkg.Wrap) {
 			Model: gorm.Model{
 				ID: 1,
 			},
+			UUID: uuid.New(),
 			Name: "drum&bass",
 		},
 		{
 			Model: gorm.Model{
 				ID: 2,
 			},
+			UUID: uuid.New(),
 			Name: "grange",
 		},
 		{
 			Model: gorm.Model{
 				ID: 3,
 			},
+			UUID: uuid.New(),
 			Name: "breakcore",
 		},
 	}
@@ -140,7 +142,6 @@ func MediaMigration(wrap *pgPkg.Wrap) {
 				ID: 1,
 			},
 			UUID: parsedUUID,
-			Path: fmt.Sprintf("/storage/song/%s.mp3", mockUUID),
 		},
 	}
 
@@ -149,8 +150,7 @@ func MediaMigration(wrap *pgPkg.Wrap) {
 			Model: gorm.Model{
 				ID: 1,
 			},
-			UUID: parsedUUID,
-			Path: fmt.Sprintf("/storage/cover/%s.jpeg", mockUUID),
+			ForeignUUID: uuid.MustParse(mockUUID),
 		},
 	}
 

@@ -1,15 +1,22 @@
 package media
 
-type ContentTypeID uint
+import "github.com/google/uuid"
+
+type ContentType string
 
 const (
-	SongCover ContentTypeID = iota
-	GenreCover
-	ProfilePicture
+	SongCover      ContentType = "song"
+	GenreCover     ContentType = "genre"
+	ProfilePicture ContentType = "profile"
 )
 
+var ContentTypeList = []ContentType{
+	SongCover,
+	GenreCover,
+	ProfilePicture,
+}
+
 type Cover struct {
-	ContentTypeID ContentTypeID
-	ForeignID     uint
-	Path          string
+	ContentType ContentType
+	ForeignUUID uuid.UUID
 }

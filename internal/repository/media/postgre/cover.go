@@ -23,13 +23,14 @@ func NewCover(pgWrap *pgPkg.Wrap) repository.ICover {
 func (obj *Cover) GetCover(ctx context.Context, uuid uuid.UUID) (*media.Cover, error) {
 	var cover models.Cover
 
-	tx := obj.Db.First(&cover, "uuid = ?", uuid)
+	tx := obj.Db.First(&cover, "foreign_uuid = ?", uuid)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
 
 	return &media.Cover{
-		Path: cover.Path,
+		ContentType: media.ContentType(cover.ContentType),
+		ForeignUUID: cover.ForeignUUID,
 	}, nil
 }
 

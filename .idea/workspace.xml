@@ -5,27 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c54b380f-fc6e-4fe0-9442-09883ff25fa4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/delivery/http/v1/request/media.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/delivery/http/v1/catalog.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/v1/catalog.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/delivery/http/v1/media.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/v1/media.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/delivery/http/v1/request/catalog.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/v1/request/catalog.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/delivery/http/v1/request/media.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/v1/request/media.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/delivery/http/v1/response/catalog.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/delivery/http/v1/response/catalog.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/catalog/artist.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/catalog/artist.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/catalog/genre.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/catalog/genre.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/catalog/song.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/catalog/song.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/media/cover.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/media/cover.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repository/catalog/postgre/genre.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/catalog/postgre/genre.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/media/track.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/media/track.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/interface.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/media/postgre/cover.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/media/postgre/cover.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/media/postgre/track.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/media/postgre/track.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/artist.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/artist.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/cover.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/cover.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/genre.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/genre.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/repository/models/song.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/song.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/usecase/catalog.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/catalog.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/models/track.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/models/track.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/usecase/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/media.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/media.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/migration/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/migration/migration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/cover/7f1bddad-08fc-4eac-b550-d3aee7a4ecb8.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/storage/cover/song_7f1bddad-08fc-4eac-b550-d3aee7a4ecb8.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmp/build-errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/build-errors.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmp/main" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/main" afterDir="false" />
     </list>

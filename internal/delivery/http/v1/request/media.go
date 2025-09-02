@@ -1,17 +1,21 @@
 package request
 
 import (
+	"io"
 	"mz-moon-back/internal/domain/media"
+
+	"github.com/google/uuid"
 )
 
-type NewCover struct {
-	ContentTypeID uint `json:"content_type_id"`
-	ForeignID     uint `json:"foreign_id"`
+type UpdateCover struct {
+	ContentType media.ContentType `json:"content_type" validate:"required"`
+	ForeignUUID string            `json:"foreign_id" validate:"required"`
+	CoverFile   io.Reader         `json:"cover_file" validate:"required"`
 }
 
-func (obj *NewCover) ToEntity() *media.Cover {
+func (obj *UpdateCover) ToEntity() *media.Cover {
 	return &media.Cover{
-		ContentTypeID: media.ContentTypeID(obj.ContentTypeID),
-		ForeignID:     obj.ForeignID,
+		ContentType: obj.ContentType,
+		ForeignUUID: uuid.MustParse(obj.ForeignUUID),
 	}
 }
