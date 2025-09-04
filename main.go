@@ -6,6 +6,7 @@ import (
 	"mz-moon-back/config"
 	httpDlv "mz-moon-back/internal/delivery/http"
 	catalogPg "mz-moon-back/internal/repository/catalog/postgre"
+	"mz-moon-back/internal/repository/fileManager"
 	mediaPg "mz-moon-back/internal/repository/media/postgre"
 	"mz-moon-back/internal/usecase"
 	pgPkg "mz-moon-back/pkg/pg"
@@ -33,9 +34,10 @@ func main() {
 	genreRepo := catalogPg.NewGenre(pgConnection)
 	trackRepo := mediaPg.NewTrack(pgConnection)
 	coverRepo := mediaPg.NewCover(pgConnection)
+	fileManagerRepo := fileManager.NewFileManager()
 
 	// usecases
-	catalogUsecase := usecase.NewCatalog(songRepo, artistRepo, genreRepo)
+	catalogUsecase := usecase.NewCatalog(songRepo, artistRepo, genreRepo, coverRepo, fileManagerRepo)
 	mediaUsecase := usecase.NewMedia(trackRepo, coverRepo)
 
 	// server

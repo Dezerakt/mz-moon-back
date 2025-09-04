@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"log"
 	"mz-moon-back/internal/domain/media"
 	"mz-moon-back/internal/repository"
 	"os"
@@ -25,7 +26,7 @@ func NewMedia(trackRepo repository.ITrack, coverRepo repository.ICover) IMedia {
 
 var (
 	ownerReadPerm os.FileMode = 0400
-	coverStorage              = "/storage/song"
+	coverStorage              = "/storage/cover"
 )
 
 func (obj *Media) GetTrack(ctx context.Context, songUUID uuid.UUID) (*os.File, error) {
@@ -48,7 +49,9 @@ func (obj *Media) GetTrackCover(ctx context.Context, songUUID uuid.UUID) (*bytes
 		return nil, err
 	}
 
-	coverFile, err := os.OpenFile(fmt.Sprintf("%s/song_%s.jpeg", coverStorage, coverData.ForeignUUID), os.O_RDONLY, ownerReadPerm)
+	log.Println(coverData)
+
+	coverFile, err := os.OpenFile(fmt.Sprintf("%s/%s_%s.jpeg", coverStorage, coverData.ContentType, coverData.ForeignUUID), os.O_RDONLY, ownerReadPerm)
 	if err != nil {
 		return nil, err
 	}
@@ -63,6 +66,6 @@ func (obj *Media) GetTrackCover(ctx context.Context, songUUID uuid.UUID) (*bytes
 }
 
 func (obj *Media) UpdateCover(ctx context.Context, cover *media.Cover, fileContent bytes.Buffer) error {
-	
+
 	return nil
 }

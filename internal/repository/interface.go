@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"bytes"
 	"context"
 	"mz-moon-back/internal/domain/catalog"
 	"mz-moon-back/internal/domain/media"
@@ -26,8 +27,11 @@ type (
 	}
 
 	ICover interface {
-		UpdateCover(ctx context.Context, cover *media.Cover) error
+		UpsertCover(ctx context.Context, cover *media.Cover) error
 		GetCover(ctx context.Context, uuid uuid.UUID) (*media.Cover, error)
-		NewCover(ctx context.Context, cover *media.Cover) error
+	}
+
+	IFileManager interface {
+		StoreCover(ctx context.Context, uuid uuid.UUID, contentType media.ContentType, fileContent *bytes.Buffer) error
 	}
 )

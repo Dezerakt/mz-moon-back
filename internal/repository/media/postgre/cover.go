@@ -34,7 +34,7 @@ func (obj *Cover) GetCover(ctx context.Context, uuid uuid.UUID) (*media.Cover, e
 	}, nil
 }
 
-func (obj *Cover) NewCover(ctx context.Context, cover *media.Cover) error {
+func (obj *Cover) UpsertCover(ctx context.Context, cover *media.Cover) error {
 	tx := obj.Db.Create(cover)
 
 	if tx.Error != nil {

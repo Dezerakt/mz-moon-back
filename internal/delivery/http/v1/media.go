@@ -94,6 +94,7 @@ func (obj *MediaRouter) getCover(c *fiber.Ctx) {
 
 	coverBytes, err := obj.u.GetTrackCover(ctx, songUUID)
 	if err != nil {
+		response.Error(c, errVo.BadRequestError, err)
 		return
 	}
 

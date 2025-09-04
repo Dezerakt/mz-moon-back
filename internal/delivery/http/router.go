@@ -10,7 +10,7 @@ import (
 )
 
 func NewRouter(app *fiber.App, cfg *config.Config, catalog usecase.ICatalog, media usecase.IMedia) {
-	app.Use(middlewares.Cors)
+	app.Use(middlewares.Cors, middlewares.LogRequest)
 
 	apiGroup := app.Group("/api")
 

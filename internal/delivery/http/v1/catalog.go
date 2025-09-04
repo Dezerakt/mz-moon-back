@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"bytes"
+	"io"
 	"mz-moon-back/internal/delivery/http/v1/request"
 	"mz-moon-back/internal/delivery/http/v1/response"
 	"mz-moon-back/internal/usecase"
@@ -31,7 +33,7 @@ func NewCatalogRouter(router fiber.Router, usecase usecase.ICatalog) {
 		genreRouter := catalogRouter.Group("/genre")
 		{
 			genreRouter.Get("/", r.getAllGenres)
-			genreRouter.Put("/", r.newGenre)
+			genreRouter.Post("/", r.newGenre)
 		}
 	}
 }
@@ -52,7 +54,27 @@ func (obj *CatalogRouter) newGenre(c *fiber.Ctx) {
 		return
 	}
 
-	err := obj.u.NewGenre(ctx, body.ToEntity())
+	coverFile, err := c.FormFile("cover_file")
+	if err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+
+	coverFileStream, err := coverFile.Open()
+	if err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+	defer coverFileStream.Close()
+
+	buffer := bytes.Buffer{}
+	_, err = io.Copy(&buffer, coverFileStream)
+	if err != nil {
+		response.Error(c, errVo.BadRequestError, err)
+		return
+	}
+
+	err = obj.u.NewGenre(ctx, body.ToEntity(), &buffer)
 	if err != nil {
 		response.Error(c, errVo.BadRequestError, err)
 		return
